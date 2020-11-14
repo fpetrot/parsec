@@ -40,21 +40,35 @@ then
 	(cd ext/splash2x/apps/water_spatial/inputs; cat input.template | sed  -e "s/NUMPROCS/${NTHREADS}/" | /root/bin/water_spatial)
 elif [ "$1" = "large" ]
 then
-	cat ext/splash2x/apps/barnes/inputs/input.template | sed -e "s/NUMPROCS/${NTHREADS}/" | bin/barnes ${NTHREADS}
-	bin/blackscholes ${NTHREADS} pkgs/apps/blackscholes/inputs/in_64K.txt prices.txt
-	bin/bodytrack pkgs/apps/bodytrack/inputs/sequenceB_4 4 4 4000 5 0 ${NTHREADS}
-	bin/cholesky -p${NTHREADS} ext/splash2x/kernels/cholesky/inputs/tk29.O
-	(cd pkgs/apps/ferret/inputs; ~/bin/ferret corel lsh queries 10 20 ${NTHREADS} output.txt)
-	bin/fft -p${NTHREADS} -m24
-	bin/fluidanimate ${NTHREADS} 5 pkgs/apps/fluidanimate/inputs/in_300K.fluid out.fluid
-	OMP_NUM_THREADS=${NTHREADS} bin/freqmine pkgs/apps/freqmine/inputs/kosarak_990k.dat 790
-	bin/lu_cb -p${NTHREADS} -n2048 -b16
-	bin/lu_ncb -p${NTHREADS} -n2048 -b16
-	bin/ocean_cp -p${NTHREADS} -n2050 -e1e-07 -r20000 -t28800
-	bin/radiosity -p${NTHREADS} -bf 1.5e-3 -batch -room
-	bin/radix -p${NTHREADS} -r4096 -n67108864 -m2147483647
-	bin/swaptions -ns 64 -sm 40000 -nt ${NTHREADS}
-	(cd ext/splash2x/apps/water_nsquared/inputs; cat input.template | sed  -e "s/NUMPROCS/${NTHREADS}/" | /root/bin/water_nsquared)
-	(cd ext/splash2x/apps/water_spatial/inputs; cat input.template | sed  -e "s/NUMPROCS/${NTHREADS}/" | /root/bin/water_spatial)
-	(cd ext/splash2x/apps/water_spatial/inputs; cat input.template | sed  -e "s/NUMPROCS/${NTHREADS}/" | /root/bin/water_spatial)
+	if [ "$2" = "24" ] || [ "$2" = "48" ] || [ "$2" = "96" ]
+	then
+		cat ext/splash2x/apps/barnes/inputs/input.template | sed -e "s/NUMPROCS/${NTHREADS}/" | time -p bin/barnes ${NTHREADS}
+		time -p bin/blackscholes ${NTHREADS} pkgs/apps/blackscholes/inputs/in_64K.txt prices.txt
+		time -p bin/bodytrack pkgs/apps/bodytrack/inputs/sequenceB_4 4 4 4000 5 0 ${NTHREADS}
+                time -p bin/cholesky -p${NTHREADS} ext/splash2x/kernels/cholesky/inputs/tk29.O
+                (cd pkgs/apps/ferret/inputs; time -p ~/bin/ferret corel lsh queries 10 20 ${NTHREADS} output.txt)
+		OMP_NUM_THREADS=${NTHREADS} time -p bin/freqmine pkgs/apps/freqmine/inputs/kosarak_990k.dat 790
+                time -p bin/lu_cb -p${NTHREADS} -n2048 -b16
+                time -p bin/lu_ncb -p${NTHREADS} -n2048 -b16
+		time -p bin/radiosity -p ${NTHREADS} -bf 1.5e-3 -batch -room
+		(cd ext/splash2x/apps/water_nsquared/inputs; cat input.template | sed  -e "s/NUMPROCS/${NTHREADS}/" | time -p /root/bin/water_nsquared)
+                (cd ext/splash2x/apps/water_spatial/inputs; cat input.template | sed  -e "s/NUMPROCS/${NTHREADS}/" | time -p /root/bin/water_spatial)
+	else
+		cat ext/splash2x/apps/barnes/inputs/input.template | sed -e "s/NUMPROCS/${NTHREADS}/" | time -p bin/barnes ${NTHREADS}
+		time -p bin/blackscholes ${NTHREADS} pkgs/apps/blackscholes/inputs/in_64K.txt prices.txt
+		time -p bin/bodytrack pkgs/apps/bodytrack/inputs/sequenceB_4 4 4 4000 5 0 ${NTHREADS}
+		time -p bin/cholesky -p${NTHREADS} ext/splash2x/kernels/cholesky/inputs/tk29.O
+		(cd pkgs/apps/ferret/inputs; time -p ~/bin/ferret corel lsh queries 10 20 ${NTHREADS} output.txt)
+		time -p bin/fft -p${NTHREADS} -m24
+		time -p bin/fluidanimate ${NTHREADS} 5 pkgs/apps/fluidanimate/inputs/in_300K.fluid out.fluid
+		OMP_NUM_THREADS=${NTHREADS} time -p bin/freqmine pkgs/apps/freqmine/inputs/kosarak_990k.dat 790
+		time -p bin/lu_cb -p${NTHREADS} -n2048 -b16
+		time -p bin/lu_ncb -p${NTHREADS} -n2048 -b16
+		time -p bin/ocean_cp -p${NTHREADS} -n2050 -e1e-07 -r20000 -t28800
+		time -p bin/radiosity -p${NTHREADS} -bf 1.5e-3 -batch -room
+		time -p bin/radix -p${NTHREADS} -r4096 -n67108864 -m2147483647
+		time -p bin/swaptions -ns 64 -sm 40000 -nt ${NTHREADS}
+		(cd ext/splash2x/apps/water_nsquared/inputs; cat input.template | sed  -e "s/NUMPROCS/${NTHREADS}/" | time -p /root/bin/water_nsquared)
+		(cd ext/splash2x/apps/water_spatial/inputs; cat input.template | sed  -e "s/NUMPROCS/${NTHREADS}/" | time -p /root/bin/water_spatial)
+	fi
 fi
