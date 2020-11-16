@@ -5,7 +5,7 @@
 
 if [ -z "$1" ] || [ -z "$2" ]
 then
-	echo "./parsec_eval smp_fix|smp_not_fix small|large [nthreads]"
+	echo "./parsec_eval smp_fix|smp_not_fix small|large|native"
 	exit 1
 fi
 
@@ -83,6 +83,15 @@ then
 			time -p bin/radiosity -p ${NTHREADS} -bf 1.5e-3 -batch -room
 			(cd ext/splash2x/apps/water_nsquared/inputs; cat input.template | sed  -e "s/NUMPROCS/${NTHREADS}/" | time -p /root/bin/water_nsquared)
                         (cd ext/splash2x/apps/water_spatial/inputs; cat input.template | sed  -e "s/NUMPROCS/${NTHREADS}/" | time -p /root/bin/water_spatial)
+		done
+	elif [ "$2" = "native" ]
+	then
+		for NTHREADS in 1 2 4 8 16 32 64 128 24 48 96
+		do
+			time -p bin/blackscholes ${NTHREADS} pkgs/apps/blackscholes/inputs/in_10M.txt prices.txt
+			time -p bin/bodytrack pkgs/apps/bodytrack/inputs/sequenceB_261 4 261 4000 5 0 ${NTHREADS}
+			time -p bin/lu_cb -p${NTHREADS} -n8096 -b32
+                        time -p bin/radiosity -p ${NTHREADS} -bf 1.5e-4 -batch -largeroom
 		done
 	fi
 fi
