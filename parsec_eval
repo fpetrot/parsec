@@ -29,7 +29,7 @@ then
 		time -p bin/swaptions -ns 16 -sm 10000 -nt ${NTHREADS}
 		(cd ext/splash2x/apps/water_nsquared/inputs; cat input.template | sed  -e "s/NUMPROCS/${NTHREADS}/" | time -p /root/bin/water_nsquared)
 		(cd ext/splash2x/apps/water_spatial/inputs; cat input.template | sed  -e "s/NUMPROCS/${NTHREADS}/" | time -p /root/bin/water_spatial)
-		done
+	done
 
 	# Those who can be executed with NTHREADS different from a power of two
 	for NTHREADS in 24 48 96
