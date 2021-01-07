@@ -1,21 +1,21 @@
-parsecmgmt -a build -p blackscholes
-parsecmgmt -a build -p bodytrack
-parsecmgmt -a build -p swaptions
-parsecmgmt -a build -p streamcluster
-parsecmgmt -a build -p fluidanimate
-parsecmgmt -a build -p ferret
-parsecmgmt -a build -p freqmine
-parsecmgmt -a build -p splash2x.barnes
-parsecmgmt -a build -p splash2x.fmm
-parsecmgmt -a build -p splash2x.ocean_cp
-parsecmgmt -a build -p splash2x.radiosity
-parsecmgmt -a build -p splash2x.raytrace
-parsecmgmt -a build -p splash2x.water_nsquared
-parsecmgmt -a build -p splash2x.water_spatial
-parsecmgmt -a build -p splash2x.cholesky
-parsecmgmt -a build -p splash2x.fft
-parsecmgmt -a build -p splash2x.radix
-parsecmgmt -a build -p splash2x.raytrace
-parsecmgmt -a build -p splash2x.lu_cb
-parsecmgmt -a build -p splash2x.lu_ncb
+parsecmgmt -a build -p blackscholes -c gcc-hooks
+parsecmgmt -a build -p bodytrack -c gcc-hooks
+parsecmgmt -a build -p swaptions -c gcc-hooks
+parsecmgmt -a build -p streamcluster -c gcc-hooks
+parsecmgmt -a build -p fluidanimate -c gcc-hooks
+parsecmgmt -a build -p ferret -c gcc-hooks
+parsecmgmt -a build -p freqmine -c gcc-hooks
+parsecmgmt -a build -p splash2x.barnes -c gcc-hooks
+parsecmgmt -a build -p splash2x.fmm -c gcc-hooks
+parsecmgmt -a build -p splash2x.ocean_cp -c gcc-hooks
+parsecmgmt -a build -p splash2x.radiosity -c gcc-hooks
+parsecmgmt -a build -p splash2x.raytrace -c gcc-hooks
+parsecmgmt -a build -p splash2x.water_nsquared -c gcc-hooks
+parsecmgmt -a build -p splash2x.water_spatial -c gcc-hooks
+parsecmgmt -a build -p splash2x.cholesky -c gcc-hooks
+parsecmgmt -a build -p splash2x.fft -c gcc-hooks
+parsecmgmt -a build -p splash2x.radix -c gcc-hooks
+parsecmgmt -a build -p splash2x.raytrace -c gcc-hooks
+parsecmgmt -a build -p splash2x.lu_cb -c gcc-hooks
+parsecmgmt -a build -p splash2x.lu_ncb -c gcc-hooks
 
