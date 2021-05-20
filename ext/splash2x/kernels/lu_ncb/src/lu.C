@@ -323,11 +323,11 @@ int main(int argc, char *argv[])
     printf("                             TESTING RESULTS\n");
     CheckResult(n, a, rhs);
   }
-
-  MAIN_END;
 #ifdef ENABLE_PARSEC_HOOKS
 	__parsec_bench_end();
 #endif
+
+  MAIN_END;
 }
 
 void SlaveStart()

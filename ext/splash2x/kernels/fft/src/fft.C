@@ -430,12 +430,12 @@ int main(int argc, char *argv[])
       printf("TEST FAILED\n");
     }
   }
-
-  MAIN_END;
-
 #ifdef ENABLE_PARSEC_HOOKS
 	__parsec_bench_end();
 #endif
+
+  MAIN_END;
+
 }
 
 

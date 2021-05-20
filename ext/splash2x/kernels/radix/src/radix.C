@@ -398,11 +398,11 @@ int main(int argc, char *argv[])
    if (test_result) {
      test_sort(global->final);  
    }
-  
-   MAIN_END;
 #ifdef ENABLE_PARSEC_HOOKS
 	__parsec_bench_end();
 #endif
+
+   MAIN_END;
 }
 
 void slave_sort()

@@ -325,12 +325,11 @@ int main(int argc, char *argv[])
       printf("PASSED\n");
     }
   }
-
-  MAIN_END
-
 #ifdef ENABLE_PARSEC_HOOKS
 	__parsec_bench_end();
 #endif
+
+  MAIN_END
 
 }
 
