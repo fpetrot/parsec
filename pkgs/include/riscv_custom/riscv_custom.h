@@ -30,13 +30,17 @@
 #define riscv_roi_begin() \
    do { \
        struct timespec __riscv_start_time, __riscv_end_time; \
-       clock_gettime(CLOCK_REALTIME, &__riscv_start_time);
+       clock_gettime(CLOCK_REALTIME, &__riscv_start_time);\
+       asm volatile("xor x0, x0, x0"); \
+       printf("XOR ADDED\n");
 
 #define riscv_roi_end() \
        clock_gettime(CLOCK_REALTIME, &__riscv_end_time); \
        printf("ROI time measured: %.3f seconds.\n", \
                (__riscv_end_time.tv_sec - __riscv_start_time.tv_sec) + \
                (__riscv_end_time.tv_nsec - __riscv_start_time.tv_nsec) * 1e-9); \
+       asm volatile("xor x0, x0, x0"); \
+       printf("XOR ADDED\n");\
    } while (0)
 
 #define riscv_terminate()

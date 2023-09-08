@@ -1,0 +1,151 @@
+#!/bin/ash
+######################################################################################
+# Command lines to launch the SMALL/MEDIUM/LARGE benchmarks with our directory organization #
+######################################################################################
+
+if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]
+then
+    echo "./parsec_exec small|medium|large nthreads parsec_name"
+	exit 1
+fi
+#echo "ADD XOR INSTRUCTION"
+#./XOR/xor #ADD THE XOR INSTRUCTION
+
+NTHREADS="$2"
+
+if [ "$3" = "barnes" ]
+then
+    if [ "$1" = "small" ]
+    then
+	cat ext/splash2x/apps/barnes/inputs/input.template | sed -e "s/NUMPROCS/${NTHREADS}/" | bin/barnes ${NTHREADS}
+    fi
+elif [ "$3" = "blackscholes" ]
+then
+    if [ "$1" = "small" ]
+    then
+	bin/blackscholes ${NTHREADS} pkgs/apps/blackscholes/inputs/in_4K.txt prices.txt
+    fi
+
+elif [ "$3" = "bodytrack" ]
+then
+    if [ "$1" = "small" ]
+    then	
+	bin/bodytrack pkgs/apps/bodytrack/inputs/sequenceB_1 4 1 1000 5 0 ${NTHREADS}
+    fi
+
+elif [ "$3" = "canneal" ]
+then
+    if [ "$1" = "small" ]
+    then	
+	bin/canneal ${NTHREADS} 10000 2000 100000.nets 32
+    fi
+
+elif [ "$3" = "cholesky" ]
+then
+    if [ "$1" = "small" ]
+    then	
+	bin/cholesky -p${NTHREADS} ext/splash2x/kernels/cholesky/inputs/tk29.O
+    fi
+
+elif [ "$3" = "facesim" ]
+then
+    if [ "$1" = "small" ]
+    then	
+	bin/facesim -timing -threads ${NTHREADS}
+    fi
+
+elif [ "$3" = "ferret" ]
+then
+    if [ "$1" = "small" ]
+    then	
+	(cd pkgs/apps/ferret/inputs; ~/bin/ferret corel lsh queries 10 20 ${NTHREADS} output.txt)
+    fi
+
+elif [ "$3" = "fft" ]
+then
+    if [ "$1" = "small" ]
+    then	
+	bin/fft -p${NTHREADS} -m20
+    fi
+
+elif [ "$3" = "fluidanimate" ]
+then
+    if [ "$1" = "small" ]
+    then	
+	bin/fluidanimate ${NTHREADS} 5 pkgs/apps/fluidanimate/inputs/in_35K.fluid out.fluid
+    fi
+
+elif [ "$3" = "freqmine" ]
+then
+    if [ "$1" = "small" ]
+    then	
+	OMP_NUM_THREADS=${NTHREADS} bin/freqmine pkgs/apps/freqmine/inputs/kosarak_250k.dat 220
+    fi
+
+elif [ "$3" = "lu_cb" ]
+then
+    if [ "$1" = "small" ]
+    then	
+	bin/lu_cb -p${NTHREADS} -n512 -b16
+    fi
+
+elif [ "$3" = "lu_ncb" ]
+then
+    if [ "$1" = "small" ]
+    then	
+	bin/lu_ncb -p${NTHREADS} -n512 -b16
+    fi
+
+elif [ "$3" = "ocean_cp" ]
+then
+    if [ "$1" = "small" ]
+    then	
+	bin/ocean_cp -p${NTHREADS} -n514 -e1e-07 -r20000 -t28800
+    fi
+
+elif [ "$3" = "ocean_ncp" ]
+then
+    if [ "$1" = "small" ]
+    then	
+	bin/ocean_ncp -p${NTHREADS} -n514 -e1e-07 -r20000 -t28800
+    fi
+
+elif [ "$3" = "radix" ]
+then
+    if [ "$1" = "small" ]
+    then	
+	bin/radix -p${NTHREADS} -r4096 -n4194304 -m2147483647
+    fi
+
+elif [ "$3" = "raytrace" ]
+then
+    if [ "$1" = "small" ]
+    then	
+	bin/raytrace -p${NTHREADS} -s -a8 ext/splash2x/apps/raytrace/inputs/teapo
+    fi
+
+elif [ "$3" = "swaptions" ]
+then
+    if [ "$1" = "small" ]
+    then	
+	if [${NTHREADS} <= 16]
+	then
+	    bin/swaptions -ns 16 -sm 10000 -nt ${NTHREADS}
+	fi
+    
+fi
+elif [ "$3" = "water_nsquared" ]
+then
+    if [ "$1" = "small" ]
+    then	
+	(cd ext/splash2x/apps/water_nsquared/inputs; cat input.template | sed  -e "s/NUMPROCS/${NTHREADS}/" | /root/bin/water_nsquared)
+    fi
+
+elif [ "$3" = "water_spatial" ]
+then
+    if [ "$1" = "small" ]
+    then	
+	(cd ext/splash2x/apps/water_spatial/inputs; cat input.template | sed  -e "s/NUMPROCS/${NTHREADS}/" | /root/bin/water_spatial)
+    fi
+fi
+#halt
