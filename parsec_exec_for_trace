@@ -33,32 +33,11 @@ then
 	bin/bodytrack pkgs/apps/bodytrack/inputs/sequenceB_1 4 1 1000 5 0 ${NTHREADS}
     fi
 
-elif [ "$3" = "canneal" ]
-then
-    if [ "$1" = "small" ]
-    then	
-	bin/canneal ${NTHREADS} 10000 2000 100000.nets 32
-    fi
-
 elif [ "$3" = "cholesky" ]
 then
     if [ "$1" = "small" ]
     then	
 	bin/cholesky -p${NTHREADS} ext/splash2x/kernels/cholesky/inputs/tk29.O
-    fi
-
-elif [ "$3" = "facesim" ]
-then
-    if [ "$1" = "small" ]
-    then	
-	bin/facesim -timing -threads ${NTHREADS}
-    fi
-
-elif [ "$3" = "ferret" ]
-then
-    if [ "$1" = "small" ]
-    then	
-	(cd pkgs/apps/ferret/inputs; ~/bin/ferret corel lsh queries 10 20 ${NTHREADS} output.txt)
     fi
 
 elif [ "$3" = "fft" ]
@@ -110,29 +89,17 @@ then
 	bin/ocean_ncp -p${NTHREADS} -n514 -e1e-07 -r20000 -t28800
     fi
 
-elif [ "$3" = "radix" ]
-then
-    if [ "$1" = "small" ]
-    then	
-	bin/radix -p${NTHREADS} -r4096 -n4194304 -m2147483647
-    fi
-
-elif [ "$3" = "raytrace" ]
-then
-    if [ "$1" = "small" ]
-    then	
-	bin/raytrace -p${NTHREADS} -s -a8 ext/splash2x/apps/raytrace/inputs/teapo
-    fi
-
 elif [ "$3" = "swaptions" ]
 then
     if [ "$1" = "small" ]
     then	
-	if [${NTHREADS} <= 16]
+	a=17
+	if [ "${NTHREADS}" -lt "$a" ]
 	then
 	    bin/swaptions -ns 16 -sm 10000 -nt ${NTHREADS}
+	else
+		echo ${NTHREADS}  "> 16"
 	fi
-    
 fi
 elif [ "$3" = "water_nsquared" ]
 then
@@ -148,4 +115,3 @@ then
 	(cd ext/splash2x/apps/water_spatial/inputs; cat input.template | sed  -e "s/NUMPROCS/${NTHREADS}/" | /root/bin/water_spatial)
     fi
 fi
-#halt
