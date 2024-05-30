@@ -102,3 +102,12 @@ else
   export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${PARSECDIR}/pkgs/libs/hooks/inst/${PARSECPLAT}/lib"
 fi
 
+# Necessary to compile facesim, because for some reason it does not inherit it from gcc.bldconf
+export PARSEC_HOME=$(git rev-parse --show-toplevel)
+# Try to export the riscv home in a somehow portable way
+export RISCY_HOME=$(dirname $(dirname $(command -v riscv64-unknown-linux-gnu-gcc)))
+if test -z "$RISCY_HOME"; then
+  echo "riscv cross-tools not in path, please add them"
+  return 1
+fi
+return 0

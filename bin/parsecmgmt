@@ -178,22 +178,28 @@ function parsec_init {
   esac
 
   # Determine HOST name to use for automatically determined PARSECPLAT
-  case "${HOSTTYPE}" in
-  *i386*)    hosttype="i386";;
-  *x86_64*)  hosttype="amd64";;
-  *amd64*)   hosttype="amd64";;
-  *i486*)    hosttype="amd64";;
-  *sparc*)   hosttype="sparc";;
-  *sun*)     hosttype="sparc";;
-  *ia64*)    hosttype="ia64";;
-  *itanium*) hosttype="ia64";;
-  *powerpc*) hosttype="powerpc";;
-  *ppc*)     hosttype="powerpc";;
-  *alpha*)   hosttype="alpha";;
-  *mips*)    hosttype="mips";;
-  *arm*)     hosttype="arm";;
-  *)         hosttype="${HOSTTYPE}";;
-  esac
+  # FP force that to riscv64 for consistency, otherwise it is called
+  # amd64 that is a bit misleading
+  if false; then
+    case "${HOSTTYPE}" in
+    *i386*)    hosttype="i386";;
+    *x86_64*)  hosttype="amd64";;
+    *amd64*)   hosttype="amd64";;
+    *i486*)    hosttype="amd64";;
+    *sparc*)   hosttype="sparc";;
+    *sun*)     hosttype="sparc";;
+    *ia64*)    hosttype="ia64";;
+    *itanium*) hosttype="ia64";;
+    *powerpc*) hosttype="powerpc";;
+    *ppc*)     hosttype="powerpc";;
+    *alpha*)   hosttype="alpha";;
+    *mips*)    hosttype="mips";;
+    *arm*)     hosttype="arm";;
+    *)         hosttype="${HOSTTYPE}";;
+    esac
+  else
+    hosttype="riscv64"
+  fi
 
   # Determine first part of value to use for PARSECPLAT environment variable if not defined by user
   # Note: We will append the compiler configuration to that to get the final value for PARSECPLAT
