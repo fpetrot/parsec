@@ -6,9 +6,12 @@ The first fork makes it easy to compile for riscv, this second one includes :
    * a script, `parsec_build` to compile the subset of the parsec that are cross-compilable.
      Indeed, some programs are compiled and executed to generate code that is again compiled to produce
      the executable,
-   * a script, `parsec_exec` to execute the programs with the appropriate 
+   * a script, `parsec_exec` to execute the programs with the appropriate.
 
-========================= README of the original fork ==========================
+Note that the original web site at Princeton has been discontinued, so we're left with finding the
+appropriate resources here and there, ...
+
+# README of the original fork
 This repo is a fork of the original PARSEC 3.0 benchmark suite at
 http://parsec.cs.princeton.edu/parsec3-doc.htm. The major change is to cross
 compile several PARSEC benchmarks to RISC-V.
