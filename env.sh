@@ -105,9 +105,10 @@ fi
 # Necessary to compile facesim, because for some reason it does not inherit it from gcc.bldconf
 export PARSEC_HOME=$(git rev-parse --show-toplevel)
 # Try to export the riscv home in a somehow portable way
-export RISCY_HOME=$(dirname $(dirname $(command -v riscv64-unknown-linux-gnu-gcc)))
-if test -z "$RISCY_HOME"; then
+riscv64-unknown-linux-gnu-gcc 2> /dev/null
+if test $? -eq 127; then
   echo "riscv cross-tools not in path, please add them"
   return 1
 fi
+export RISCY_HOME=$(dirname $(dirname $(command -v riscv64-unknown-linux-gnu-gcc)))
 return 0
