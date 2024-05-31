@@ -1,8 +1,12 @@
+# Hacked Parsec Benchmark for Execution on (QEMU) RISC-V 
 This repo is a fork of a fork of the parsec benchmark repo.
-The first fork makes it easy to compile for riscv, this second one includes
-pointers to the datasets needed :
-https://github.com/cirosantilli/parsec-benchmark/releases/tag/3.0
+The first fork makes it easy to compile for riscv, this second one includes :
 
+   * pointers to the datasets needed : https://github.com/cirosantilli/parsec-benchmark/releases/tag/3.0,
+   * a script, `parsec_build` to compile the subset of the parsec that are cross-compilable.
+     Indeed, some programs are compiled and executed to generate code that is again compiled to produce
+     the executable,
+   * a script, `parsec_exec` to execute the programs with the appropriate 
 
 ========================= README of the original fork ==========================
 This repo is a fork of the original PARSEC 3.0 benchmark suite at
