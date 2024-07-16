@@ -93,13 +93,13 @@ elif [ "$3" = "swaptions" ]
 then
     if [ "$1" = "small" ]
     then	
-	a=17
-	if [ "${NTHREADS}" -lt "$a" ]
-	then
-	    bin/swaptions -ns 16 -sm 10000 -nt ${NTHREADS}
-	else
-		echo ${NTHREADS}  "> 16"
-	fi
+	# a=17
+	# if [ "${NTHREADS}" -lt "$a" ]
+	# then
+	    bin/swaptions -ns  ${NTHREADS} -sm 10000 -nt ${NTHREADS}
+	# else
+	# 	echo ${NTHREADS}  "> 16"
+	# fi
 fi
 elif [ "$3" = "water_nsquared" ]
 then
