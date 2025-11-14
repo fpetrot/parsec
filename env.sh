@@ -107,7 +107,6 @@ export PARSEC_HOME=$(git rev-parse --show-toplevel)
 # Try to export the riscv home in a somehow portable way
 if [ -f /opt/riscv/linux/bin/riscv64-unknown-linux-gnu-gcc ]; then
    export RISCY_HOME="/opt/riscv/linux/bin/riscv64-unknown-linux-gnu-gcc"
-   return 0
 else
 	riscv64-unknown-linux-gnu-gcc 2> /dev/null
 	if test $? -eq 127; then
