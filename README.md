@@ -2,7 +2,8 @@
 This repo is a fork of a fork of the parsec benchmark repo.
 The first fork makes it easy to compile for riscv, this second one includes :
 
-   * pointers to the datasets needed : https://github.com/cirosantilli/parsec-benchmark/releases/tag/3.0,
+   * pointers to the datasets needed : https://github.com/cirosantilli/parsec-benchmark/releases/tag/3.0 -- these can also be downloaded and extracted automatically with get_inputs.sh
+	 
    * a script, `parsec_build` to compile the subset of the parsec that are cross-compilable.
      Indeed, some programs are compiled and executed to generate code that is again compiled to produce
      the executable,
