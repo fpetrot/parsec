@@ -106,13 +106,18 @@ fi
 export PARSEC_HOME=$(git rev-parse --show-toplevel)
 # Try to export the riscv home in a somehow portable way
 if [ -f /opt/riscv/linux/bin/riscv64-unknown-linux-gnu-gcc ]; then
-   export RISCY_HOME="/opt/riscv/linux/bin/riscv64-unknown-linux-gnu-gcc"
+   export RISCY_HOME="/opt/riscv/linux/bin/riscv64-unknown-linux-gnu-gcc"	
 else
-	riscv64-unknown-linux-gnu-gcc 2> /dev/null
-	if test $? -eq 127; then
-		echo "riscv cross-tools not in path, please add them"
-		return 1
+	crossmatch=$(find /opt/ -type f -name "riscv64-unknown-linux-gnu-gcc" 2>&1 | grep -v "**Permission**")
+	if [ -z "$crossmatch"  ]; then
+		riscv64-unknown-linux-gnu-gcc 2> /dev/null
+		if test $? -eq 127; then
+			echo "riscv cross-tools not in path, please add them"
+			return 1
+		fi
+		export RISCY_HOME=$(dirname $(dirname $(command -v riscv64-unknown-linux-gnu-gcc)))
+	else
+		export RISCY_HOME="$crossmatch"
 	fi
-	export RISCY_HOME=$(dirname $(dirname $(command -v riscv64-unknown-linux-gnu-gcc)))
 fi
 return 0
