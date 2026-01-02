@@ -6,8 +6,14 @@ The first fork makes it easy to compile for riscv, this second one includes :
    * pointers to the datasets needed : https://github.com/cirosantilli/parsec-benchmark/releases/tag/3.0,
      So replace the `wget` lines below with :
     ```shell
+    wget https://github.com/cirosantilli/parsec-benchmark/releases/tag/3.0/parsec-3.0-core.tar.gz
     wget https://github.com/cirosantilli/parsec-benchmark/releases/tag/3.0/parsec-3.0-input-sim.tar.gz
-    wget https://github.com/cirosantilli/parsec-benchmark/releases/tag/3.0/parsec-3.0-input-native.tar.gz
+    wget https://github.com/cirosantilli/parsec-benchmark/releases/tag/3.0/parsec-3.0-input-native.tar.gz.0
+    wget https://github.com/cirosantilli/parsec-benchmark/releases/tag/3.0/parsec-3.0-input-native.tar.gz.1
+    wget https://github.com/cirosantilli/parsec-benchmark/releases/tag/3.0/parsec-3.0-input-native.tar.gz.2
+    wget https://github.com/cirosantilli/parsec-benchmark/releases/tag/3.0/parsec-3.0-input-native.tar.gz.3
+    wget https://github.com/cirosantilli/parsec-benchmark/releases/tag/3.0/parsec-3.0-input-native.tar.gz.4
+    cat parsec-3.0-input-native.tar.gz.[0-4] > parsec-3.0-input-native.tar.gz
     ```
     or just click on the links above, as it seems that github kills the `wget` connection at some
     point in time
